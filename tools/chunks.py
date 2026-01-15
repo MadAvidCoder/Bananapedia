@@ -1,5 +1,5 @@
 ## A helper script that reads out the chunks one at a time for easy Wikipedia editing
-## It also tracks the revision ids for use later!
+## It also tracks the revision ids for use later, into '../revisions.txt'
 import json
 
 with open("../encoded.json", "r") as f:
@@ -26,3 +26,16 @@ for i in range(start, len(chunks)):
         f.write(x)
         f.write("\n")
     print("-----------------------------------------------------")
+
+# For reference, the identifiable discourse markers include:
+# However,
+# Additionally,
+# For example,
+# Since then,
+# Meanwhile,
+# Moreover,
+# Otherwise,
+# Later,
+# Traditionally,
+# Consequently,
+# Subsequently,
