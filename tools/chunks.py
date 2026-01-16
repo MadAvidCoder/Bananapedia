@@ -13,7 +13,7 @@ try:
     start = min(int(start), len(chunks))
 except:
     start = 0
-
+print(len(chunks))
 for i in range(start, len(chunks)):
     print(f"Chunk ID: {i}")
     print(chunks[i])
@@ -45,3 +45,17 @@ for i in range(start, len(chunks)):
 # That is,
 # Nationally,
 # Previously,
+# Eventually,
+# Accordingly
+# Notably,
+
+# 000
+# 001
+# 010
+# 011
+# 100
+# 101
+# 110
+# 111
+
+# 822
