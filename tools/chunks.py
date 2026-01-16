@@ -50,14 +50,4 @@ for i in range(start, len(chunks)):
 # Notably,
 # Here,
 # As such,
-
-# 000
-# 001
-# 010
-# 011
-# 100
-# 101
-# 110
-# 111
-
-# 1307
+# Partly,
