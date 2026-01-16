@@ -38,6 +38,7 @@ def get_edit(rev):
     added_lines = soup.find_all("td", class_="diff-addedline diff-side-added")
     text_lines = [td.get_text(separator=" ", strip=True) for td in added_lines]
     text = " ".join(text_lines)
+    text = re.sub(r"<ref[^>]*?>.*?</ref>", "", text, flags=re.DOTALL)
     text = re.sub(r" ,", ",", text)
 
     sentences = re.split(r"(?<=[.!?])\s+", text)
