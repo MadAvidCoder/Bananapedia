@@ -1,6 +1,5 @@
 ## A helper to fetch the edits from wikipedia, based on a revision ID
 import requests
-from bs4 import BeautifulSoup
 import re
 
 def get_edit(rev):
@@ -32,22 +31,16 @@ def get_edit(rev):
         }
         r = requests.get(url, params=diff_params, headers=headers)
         html = r.json()["compare"]["*"]
+        html = re.sub(r"\[\[[^\[\]]*?\|([^\[\]]*?)\]\]", r"\1", html)
+        html = re.sub(r"\[\[([^\[\]]*?)\]\]", r"\1", html)
+        html = re.sub(r"<ref[^>]*?>.*?</ref>", "", html, flags=re.DOTALL)
+        html = re.sub(r"&lt;ref[^&]*?&gt;.*?&lt;\/ref&gt;", "", html, flags=re.DOTALL)
+        html = re.sub(r"\s+", " ", html).strip()
 
-        soup = BeautifulSoup(html, "html.parser")
-        inserted_text = soup.find_all("ins", class_="diffchange diffchange-inline")
+        sentence = re.search(r'(?:^|[.!?]\s)([^.!?]*?<ins class="diffchange diffchange-inline">.*?<\/ins>[^.!?]*?[.!?])', html)
+        sentence = sentence.group(1)
+        sentence = re.sub(r"<.*?>", "", sentence).strip()
 
-        sentences = []
-        for tag in inserted_text:
-            text = tag.get_text(separator=" ", strip=True)
-            parent_text = tag.parent.get_text(separator=" ", strip=True)
-            parent_text = re.sub(r"<ref[^>]*?>.*?</ref>", "", parent_text, flags=re.DOTALL)
-            parent_text = re.sub(r"\[\[.*?\|(.*?)\]\]", r"\1", parent_text)
-            parent_text = re.sub(r"\[\[(.*?)\]\]", r"\1", parent_text)
-            parent_sentences = re.split(r"(?<=[.!?])\s+", parent_text)
-            for s in parent_sentences:
-                if text in s:
-                    sentences.append(s)
-
-        return sentences[0] if sentences else ""
+        return sentence
     except:
         return ""
