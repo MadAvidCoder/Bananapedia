@@ -13,7 +13,7 @@ try:
     start = min(int(start), len(chunks))
 except:
     start = 0
-print(len(chunks))
+
 for i in range(start, len(chunks)):
     print(f"Chunk ID: {i}")
     print(chunks[i])
