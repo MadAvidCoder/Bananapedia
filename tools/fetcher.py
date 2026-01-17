@@ -34,13 +34,22 @@ def get_edit(rev):
         html = re.sub(r"\[\[[^\[\]]*?\|([^\[\]]*?)\]\]", r"\1", html)
         html = re.sub(r"\[\[([^\[\]]*?)\]\]", r"\1", html)
         html = re.sub(r"<ref[^>]*?>.*?</ref>", "", html, flags=re.DOTALL)
-        html = re.sub(r"&lt;ref[^&]*?&gt;.*?&lt;\/ref&gt;", "", html, flags=re.DOTALL)
+        html = re.sub(r"{{.*?}}", "", html, flags=re.DOTALL)
         html = re.sub(r"\s+", " ", html).strip()
+        # print(html)
 
-        sentence = re.search(r'(?:^|[.!?]\s)([^.!?]*?<ins class="diffchange diffchange-inline">.*?<\/ins>[^.!?]*?[.!?])', html)
-        sentence = sentence.group(1)
-        sentence = re.sub(r"<.*?>", "", sentence).strip()
-
+        sentence = re.search(r'(?:^|[.!?]\s?)([^.!?]*?<ins class="diffchange diffchange-inline">.*?<\/ins>[^.!?]*?[.!?])', html)
+        if sentence:
+            sentence = sentence.group(1)
+            sentence = re.sub(r"<.*?>", "", sentence).strip()
+            sentence = re.sub(r"\s+", " ", sentence).strip()
+            return sentence
+        else:
+            sentence = re.search(r'(?:^|[.!?]\s?)([^.!?]*?<del class="diffchange diffchange-inline">.*?<\/del>[^.!?]*?[.!?])', html)
+            sentence = sentence.group(1)
+            sentence = re.sub(r'<del.*<\/del>', "", sentence).strip()
+            sentence = re.sub(r"<.*?>", "", sentence).strip()
+            sentence = re.sub(r"\s+", " ", sentence).strip()
         return sentence
     except:
         return ""
