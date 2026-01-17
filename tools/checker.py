@@ -12,7 +12,7 @@ chunks = [bitstream[i:i+3] for i in range(0, len(bitstream), 3)]
 with open("../revisions.txt", "r") as f:
     revisions = [s.rstrip() for s in f.readlines()]
 
-edits = get_sentences(revisions[:20])
+edits = get_sentences(revisions)
 
 fails = 0
 
