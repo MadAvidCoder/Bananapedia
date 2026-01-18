@@ -1,4 +1,4 @@
-## A tool to assist in decreasing the overall size of the image, with quantization, RLE and huffman, and then output a binary string.
+## A tool to assist in decreasing the overall size of the image by performing quantization, RLE and using huffman codes, and then output a binary string and related metadata.
 
 from PIL import Image
 import heapq
