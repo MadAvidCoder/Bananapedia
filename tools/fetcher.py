@@ -87,8 +87,7 @@ async def get_edit(rev, client):
             sentence = re.sub(r"<.*?>", "", sentence).strip()
             sentence = re.sub(r"\s+", " ", sentence).strip()
         return sentence
-    except Exception as e:
-        print(e)
+    except:
         return ""
 
 async def get_async_sentences(revs):

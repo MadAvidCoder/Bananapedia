@@ -20,7 +20,7 @@ for i, edit in enumerate(edits):
     decoded = decode(edit)
     original = chunks[i]
     if original != decoded:
-        print(f"ERROR: line {i}: {original} != {decoded}")
+        print(f"ERROR: line {i+1}: {original} != {decoded}")
         fails += 1
 
 print("-------------------------------------------------")
