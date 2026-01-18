@@ -21,7 +21,7 @@ To do this, I devised an encoding system, where specific grammatical elements (e
 
 I then made **over 200 edits** to Wikipedia, each carefully encoding a small chunk of the image. Each of these provided a unique edit ID, which can later be used to retrieve the edited sentence.
 
-> INFO
+> [!IMPORTANT]
 > All edits to Wikipedia were constructive and useful, such as grammar fixes and clarity improvements.
 > No vandalism occurred, and all edits were in line with the Wikipedia Terms of Use. 
 
